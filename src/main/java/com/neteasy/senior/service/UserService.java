@@ -6,6 +6,7 @@ import com.neteasy.senior.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -25,6 +26,13 @@ public class UserService {
     @MyCached(key = "#userId")
     public User findUserById(String userId){
         return userDao.myFindById(userId);
+    }
+
+    @Transactional
+    public void addUser(User user){
+//        User user = new User("3","yangxiang_test3");
+        userDao.save(user);
+        int i = 1/0;
     }
 
 }
